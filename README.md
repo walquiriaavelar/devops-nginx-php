@@ -1,3 +1,4 @@
+HEAD
 # 📦 devops-nginx-php
 
 Ambiente local com **Nginx**, **PHP-FPM** e **Docker Compose**, estruturado como microsserviços para testes e deploys de aplicações PHP.
@@ -33,7 +34,7 @@ Criar um ambiente de desenvolvimento local que simula uma estrutura de produçã
 ### 2. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/devops-nginx-php.git
+git clone https://github.com/walquiriaavelar/devops-nginx-php.git
 cd devops-nginx-php
 ```
 
@@ -86,4 +87,7 @@ devops-nginx-php/
 
 ## 📌 Autor
 
-Desenvolvido para o **Teste Prático da vaga DevOps** – SCI Sistemas Contábeis
+Desenvolvido para o **Teste Prático da vaga DevOps** – SCI
+
+# devops-nginx-php
+b2fad8344ce9bcaf697fa695d3f53cc9a0d67d25
