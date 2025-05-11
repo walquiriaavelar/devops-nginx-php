@@ -79,7 +79,7 @@ docker compose up --build
 
 3. Acesse no navegador
 
-http://localhost:8080
+http://3.142.184.60:8080/
 
 Mensagem esperada:
 
@@ -105,7 +105,7 @@ devops-nginx-php/
 
 1. Conectar na instância
 
-ssh -i "key.pem" ec2-user@<IP_PUBLICO_DA_INSTANCIA>
+ssh -i "C:/Users/7390/Desktop/devops-teste/DOCKER/key.pem" ec2-user@3.142.184.60
 
 2. Instalar Docker e Docker Compose
 
@@ -115,7 +115,7 @@ sudo service docker start
 sudo usermod -a -G docker ec2-user
 exit
 # reconectar para aplicar permissões
-ssh -i "key.pem" ec2-user@<IP_PUBLICO>
+ssh -i "C:/Users/7390/Desktop/devops-teste/DOCKER/key.pem" ec2-user@3.142.184.60
 
 # instalar docker compose v2
 mkdir -p ~/.docker/cli-plugins/
@@ -125,7 +125,7 @@ docker compose version
 
 3. Transferir arquivos para EC2
 
-scp -i "key.pem" -r ./devops-nginx-php ec2-user@<IP_PUBLICO>:/home/ec2-user/
+scp -i "C:/Users/7390/Desktop/devops-teste/DOCKER/key.pem" ./devops-nginx-php/php/html/index.php ec2-user@3.142.184.60:/home/ec2-user/devops-nginx-php/php/html/
 
 4. Rodar projeto na EC2
 
@@ -134,7 +134,7 @@ docker compose up -d --build
 
 5. Acessar no navegador
 
-http://<IP_PUBLICO_DA_INSTANCIA>:8080
+http://3.142.184.60:8080/
 
 Mensagem esperada:
 
