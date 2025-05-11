@@ -154,4 +154,4 @@ O projeto usa a porta 8080 para evitar conflitos com a 80 localmente
 
 Desenvolvido por Walquíria Avelar para o Teste Prático da vaga DevOps – SCI Sistemas Contábeis
 
-Repositório: https://github.com/walquiriaavelar/devops-nginx-php
+Repositório: https://github.com/walquiriaavelar/devops-nginx-php# Força execução do deploy automatizado
