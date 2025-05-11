@@ -1,93 +1,157 @@
-HEAD
-# 📦 devops-nginx-php
+📦 devops-nginx-php
 
-Ambiente local com **Nginx**, **PHP-FPM** e **Docker Compose**, estruturado como microsserviços para testes e deploys de aplicações PHP.
+Ambiente local com Nginx, PHP-FPM e Docker Compose, estruturado como microsserviços para testes e deploys de aplicações PHP.
 
----
+✅ Etapas do Projeto
 
-## ✅ Objetivo
+1. Configuração do ambiente local usando estrutura de microsserviços
 
-Criar um ambiente de desenvolvimento local que simula uma estrutura de produção moderna com:
-- Servidor web (Nginx)
-- Interpretador PHP (PHP-FPM)
-- Gerenciamento via Docker Compose
+Instale o Docker em seu ambiente de desenvolvimento local (Windows 11 com Docker Desktop)
 
----
+Crie um container Docker para executar um servidor web Nginx
 
-## ⚙️ Tecnologias utilizadas
+Configure o contêiner para expor a porta 80 (neste projeto usamos a 8080 para evitar conflitos locais)
 
-- Docker
-- Docker Compose
-- Nginx
-- PHP 8.1 (FPM)
-- Windows 11 (Docker Desktop com WSL 2)
+Crie um contêiner PHP-FPM para receber requisições do Nginx na porta 9000
 
----
+Crie um arquivo index.php simples que retorna: Olá, mundo!
 
-## 🚀 Como instalar e rodar o projeto
+Obs: Utilizamos imagens oficiais do Docker Hub para Nginx e PHP.
 
-### 1. Pré-requisitos
+2. Implantação na AWS
 
-- Docker Desktop instalado e rodando no Windows 11
-- Terminal PowerShell, CMD ou VS Code
+Crie uma conta AWS (free tier)
 
-### 2. Clone o repositório
+Crie uma instância EC2 (Amazon Linux 2023, tipo t2.micro)
 
-```bash
+Configure o grupo de segurança para liberar a porta 8080 (ou 80 se preferir)
+
+Instale o Docker e Docker Compose na instância EC2
+
+Transfira os arquivos via scp
+
+Execute os containers com docker compose up -d --build
+
+Acesse a aplicação pelo IP público da EC2 no navegador (ex: http://3.142.184.60:8080)
+
+3. Automação
+
+O projeto inclui um arquivo docker-compose.yml que configura os serviços Nginx e PHP-FPM
+
+Facilita a execução em qualquer ambiente com docker compose up
+
+4. Documentação (Este README)
+
+Este README detalha:
+
+Como executar o projeto localmente
+
+Como implantar na AWS
+
+Particularidades do projeto
+
+Comandos utilizados
+
+⚙️ Tecnologias utilizadas
+
+Docker
+
+Docker Compose
+
+Nginx
+
+PHP 8.1 (FPM)
+
+Amazon EC2
+
+Windows 11 (Docker Desktop com WSL 2)
+
+🚀 Como instalar e rodar o projeto (localmente)
+
+1. Clone o repositório
+
 git clone https://github.com/walquiriaavelar/devops-nginx-php.git
 cd devops-nginx-php
-```
 
-### 3. Execute o ambiente com Docker
+2. Execute com Docker Compose
 
-```bash
 docker compose up --build
-```
 
-### 4. Acesse no navegador:
+3. Acesse no navegador
 
-```
 http://localhost:8080
-```
 
-Você verá a mensagem:
-```
+Mensagem esperada:
+
 Olá, mundo!
-```
 
-### 5. Parar os containers:
+4. Parar os containers
 
-```bash
 docker compose down
-```
 
----
+📁 Estrutura do projeto
 
-## 📁 Estrutura do projeto
-
-```
 devops-nginx-php/
 ├── docker-compose.yml
 ├── html/
 │   └── index.php
 ├── nginx/
 │   └── default.conf
-├── Dockerfile
-```
+├── php/
+│   └── Dockerfile
+├── README.md
 
----
+☁️ Deploy na AWS EC2
 
-## 💡 Particularidades
+1. Conectar na instância
 
-- O `Dockerfile` está na raiz e monta a imagem do PHP-FPM.
-- O Nginx redireciona requisições `.php` para o PHP-FPM na porta `9000`.
-- O projeto expõe a porta `8080` para evitar conflitos com servidores locais.
+ssh -i "key.pem" ec2-user@<IP_PUBLICO_DA_INSTANCIA>
 
----
+2. Instalar Docker e Docker Compose
 
-## 📌 Autor
+sudo yum update -y
+sudo yum install docker -y
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+exit
+# reconectar para aplicar permissões
+ssh -i "key.pem" ec2-user@<IP_PUBLICO>
 
-Desenvolvido para o **Teste Prático da vaga DevOps** – SCI
+# instalar docker compose v2
+mkdir -p ~/.docker/cli-plugins/
+curl -SL https://github.com/docker/compose/releases/download/v2.27.1/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
+docker compose version
 
-# devops-nginx-php
-b2fad8344ce9bcaf697fa695d3f53cc9a0d67d25
+3. Transferir arquivos para EC2
+
+scp -i "key.pem" -r ./devops-nginx-php ec2-user@<IP_PUBLICO>:/home/ec2-user/
+
+4. Rodar projeto na EC2
+
+cd devops-nginx-php
+docker compose up -d --build
+
+5. Acessar no navegador
+
+http://<IP_PUBLICO_DA_INSTANCIA>:8080
+
+Mensagem esperada:
+
+Olá, mundo!
+
+💡 Particularidades
+
+O index.php está dentro de html/
+
+O container PHP-FPM é construído via Dockerfile personalizado
+
+O Nginx redireciona requisições PHP para o PHP-FPM na porta 9000
+
+O projeto usa a porta 8080 para evitar conflitos com a 80 localmente
+
+👩‍💻 Autor
+
+Desenvolvido por Walquíria Avelar para o Teste Prático da vaga DevOps – SCI Sistemas Contábeis
+
+Repositório: https://github.com/walquiriaavelar/devops-nginx-php
