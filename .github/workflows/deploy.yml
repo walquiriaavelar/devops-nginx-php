@@ -1,0 +1,31 @@
+name: Deploy to AWS ECS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Login no ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build da imagem e envio ao ECR
+        run: |
+          docker build -t php-app ./php
+          docker tag php-app:latest 927292413936.dkr.ecr.us-east-2.amazonaws.com/php-app:latest
+          docker push 927292413936.dkr.ecr.us-east-2.amazonaws.com/php-app:latest
+
+      - name: Deploy para ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: php/github/php-task-def.json
+          service: php-service-lb
+          cluster: php-cluster-dev
+          wait-for-service-stability: true
