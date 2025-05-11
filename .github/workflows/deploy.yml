@@ -15,12 +15,20 @@ jobs:
 
       - name: Login no ECR
         uses: aws-actions/amazon-ecr-login@v1
+        env:
+          AWS_REGION: us-east-2
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Build da imagem e envio ao ECR
         run: |
           docker build -t php-app ./php
           docker tag php-app:latest 927292413936.dkr.ecr.us-east-2.amazonaws.com/php-app:latest
           docker push 927292413936.dkr.ecr.us-east-2.amazonaws.com/php-app:latest
+        env:
+          AWS_REGION: us-east-2
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy para ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -29,3 +37,7 @@ jobs:
           service: php-service-lb
           cluster: php-cluster-dev
           wait-for-service-stability: true
+        env:
+          AWS_REGION: us-east-2
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
