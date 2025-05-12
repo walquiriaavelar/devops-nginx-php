@@ -1,2 +1,5 @@
 devops-nginx-php/
 website-templates/
+# Ignorar apenas o socket do MySQL
+html/mysql-data/mysql.sock
+html/mysql-data/*.pid
