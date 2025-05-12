@@ -155,3 +155,28 @@ O projeto usa a porta 8080 para evitar conflitos com a 80 localmente
 Desenvolvido por Walquíria Avelar para o Teste Prático da vaga DevOps – SCI Sistemas Contábeis
 
 Repositório: https://github.com/walquiriaavelar/devops-nginx-php# Força execução do deploy automatizado
+
+## ✅ Deploy automático via GitHub Actions
+
+*Deploy validado sem erros.*  
+1. Adicione o arquivo `.github/workflows/deploy-ec2.yml` ao repositório.  
+2. Configure os **Secrets** no GitHub: `EC2_HOST`, `EC2_USER` e `EC2_SSH_KEY` (cole a cópia exata da sua chave PEM).  
+3. Faça push no branch `main` e aguarde a execução bem-sucedida na aba **Actions**.  
+4. O workflow conecta por SSH à EC2, faz `scp` dos arquivos e executa:
+   ```bash
+   docker-compose down && docker-compose up -d --build
+
+   💡 Particularidades
+
+O projeto usa a porta 8080 para evitar conflitos com a 80 localmente
+
+#### ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
+
+*Deploy validado sem erros.*  
+1. Adicione o arquivo `.github/workflows/deploy-ec2.yml` ao repositório.  
+2. Configure os **Secrets** no GitHub: `EC2_HOST`, `EC2_USER` e `EC2_SSH_KEY` (cole a cópia exata da sua chave PEM).  
+3. Faça push no branch `main` e aguarde a execução bem-sucedida na aba **Actions**.  
+4. O workflow conecta por SSH à EC2, faz `scp` dos arquivos e executa:
+   ```bash
+   docker-compose down && docker-compose up -d --build
+
