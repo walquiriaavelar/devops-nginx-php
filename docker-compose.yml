@@ -14,9 +14,7 @@ services:
       - mysql
 
   php:
-    build:
-      context: ./php
-      dockerfile: Dockerfile # Especifica explicitamente o Dockerfile dentro do diretório php
+    build: ./php
     container_name: php
     volumes:
       - ./html:/var/www/html
