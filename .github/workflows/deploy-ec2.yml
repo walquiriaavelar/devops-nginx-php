@@ -23,6 +23,8 @@ jobs:
           port: 22
           source: "."
           target: "/home/ec2-user/devops-nginx-php"
+          debug: true
+
 
       - name: SSH into EC2 and deploy with Docker Compose
         uses: appleboy/ssh-action@v1.0.0
