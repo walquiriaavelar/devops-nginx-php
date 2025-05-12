@@ -1,5 +1,51 @@
-devops-nginx-php/
-website-templates/
-# Ignorar apenas o socket do MySQL
+# ========================
+# VSCode
+# ========================
+.vscode/
+*.code-workspace
+
+# ========================
+# Docker & Containers
+# ========================
+docker-compose.override.yml
+docker-compose.prod.yml
+.env
+*.pem
+
+# ========================
+# Sistema Operacional
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Arquivos temporários e logs
+# ========================
+*.log
+*.tmp
+*.bak
+*.old
+
+# ========================
+# PHP
+# ========================
+*.cache
+vendor/
+
+# ========================
+# MySQL - Ignorar arquivos problemáticos e não suportados pelo Git
+# ========================
 html/mysql-data/mysql.sock
 html/mysql-data/*.pid
+
+# ========================
+# Exemplo: ignorar arquivos binários pesados ou logs (opcional, remova se quiser versionar tudo)
+# html/mysql-data/*.ib*
+# html/mysql-data/ib*
+# html/mysql-data/binlog.*
+
+# ========================
+# Pastas específicas do seu projeto
+# ========================
+devops-nginx-php/
+website-templates/
