@@ -1,51 +1,52 @@
-# ========================
-# VSCode
-# ========================
-.vscode/
-*.code-workspace
+# ================================
+# Node, PHP, Docker, MySQL, VS Code
+# ================================
 
-# ========================
-# Docker & Containers
-# ========================
-docker-compose.override.yml
-docker-compose.prod.yml
-.env
-*.pem
-
-# ========================
-# Sistema Operacional
-# ========================
+# Ignorar arquivos e pastas temporárias do sistema
 .DS_Store
 Thumbs.db
 
-# ========================
-# Arquivos temporários e logs
-# ========================
+# Ignorar diretórios do VS Code
+.vscode/
+
+# Ignorar logs e arquivos temporários
 *.log
 *.tmp
-*.bak
-*.old
 
-# ========================
-# PHP
-# ========================
+# Ignorar arquivos de cache do PHP
 *.cache
-vendor/
 
-# ========================
-# MySQL - Ignorar arquivos problemáticos e não suportados pelo Git
-# ========================
+# Ignorar arquivos sensíveis de certificados (se não quiser versionar)
+*.pem
+
+# Ignorar pastas de dados do MySQL gerados por volume
 html/mysql-data/mysql.sock
 html/mysql-data/*.pid
 
-# ========================
-# Exemplo: ignorar arquivos binários pesados ou logs (opcional, remova se quiser versionar tudo)
+# (opcional) Se você não quiser versionar dados binários e logs pesados, pode também:
 # html/mysql-data/*.ib*
 # html/mysql-data/ib*
 # html/mysql-data/binlog.*
 
-# ========================
-# Pastas específicas do seu projeto
-# ========================
-devops-nginx-php/
-website-templates/
+# Ignorar diretórios de build/containers antigos
+docker-compose.override.yml
+docker-compose.prod.yml
+
+# Ignorar arquivos de backup comuns
+*.bak
+*.old
+
+# Ignorar arquivos ocultos
+.*~
+html/mysql-data/mysql.sock
+html/mysql-data/*.pid
+DOCKER/mysql-data/
+*/mysql-data/
+DOCKER/mysql-data/
+/DOCKER/mysql-data/
+/DOCKER/mysql-data/*
+git check-ignore -v DOCKER/mysql-data/*
+
+# Ignorar arquivos do MySQL
+mysql-data/
+
