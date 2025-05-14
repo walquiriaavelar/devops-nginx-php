@@ -1,3 +1,22 @@
+# devops-nginx-php
+
+![CI/CD](https://github.com/walquiriaavelar/devops-nginx-php/actions/workflows/ci-cd-pipeline.yml/badge.svg)
+
+## Descrição
+
+Este repositório contém:
+
+- **Workflow GitHub Actions** para build das imagens Docker (PHP-FPM e Nginx).  
+- Testes básicos de smoke test via `curl`.  
+- Deploy automático em instância EC2 via SSH + `docker-compose`.
+
+## Como usar
+
+1. Clone o repo  
+2. Configure as [Secrets](https://docs.github.com/actions/security-guides/encrypted-secrets)  
+3. Push em `main` para disparar o pipeline  
+
+
 📦 devops-nginx-php
 
 Ambiente local com Nginx, PHP-FPM e Docker Compose, estruturado como microsserviços para testes e deploys de aplicações PHP.
